@@ -14,3 +14,4 @@ jobs:
         goos: linux
         goarch: amd64
         goversion: 1.13
+        overwrite: true
