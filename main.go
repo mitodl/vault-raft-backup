@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"path/filepath"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -18,6 +19,7 @@ type VaultConfig struct {
 	vaultAddr    string
 	token        string
 	snapshotPath string
+	insecure     bool
 }
 
 // AWSConfig is for aws interaction
@@ -29,10 +31,15 @@ type AWSConfig struct {
 
 func main() {
 	// initialize vaultConfig and awsConfig
+  insecure, err := strconv.ParseBool(os.Getenv("VAULT_SKIP_VERIFY"))
+	if err != nil {
+		log.Fatalln("Invalid value for VAULT_SKIP_VERIFY")
+	}
 	vaultConfig := VaultConfig{
 		vaultAddr:    os.Getenv("VAULT_ADDR"),
 		token:        os.Getenv("VAULT_TOKEN"),
 		snapshotPath: os.Getenv("VAULT_SNAPSHOT_PATH"),
+		insecure:     insecure,
 	}
 	awsConfig := AWSConfig{
 		s3Bucket: os.Getenv("S3_BUCKET"),
@@ -58,8 +65,16 @@ func main() {
 
 // vault raft snapshot creation
 func vaultRaftSnapshot(config *VaultConfig) (*os.File, error) {
+	// initialize config
+	vaultConfig := &api.Config{Address: config.vaultAddr}
+	err := vaultConfig.ConfigureTLS(&api.TLSConfig{Insecure: config.insecure})
+	if err != nil {
+		fmt.Println("Vault TLS configuration failed to initialize")
+		fmt.Println(err)
+		return nil, err
+	}
 	// initialize client
-	client, err := api.NewClient(&api.Config{Address: config.vaultAddr})
+	client, err := api.NewClient(vaultConfig)
 	if err != nil {
 		fmt.Println("Vault client failed to initialize")
 		fmt.Println(err)
