@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"path/filepath"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -31,7 +31,7 @@ type AWSConfig struct {
 
 func main() {
 	// initialize vaultConfig and awsConfig
-  insecure, err := strconv.ParseBool(os.Getenv("VAULT_SKIP_VERIFY"))
+	insecure, err := strconv.ParseBool(os.Getenv("VAULT_SKIP_VERIFY"))
 	if err != nil {
 		log.Fatalln("Invalid value for VAULT_SKIP_VERIFY")
 	}

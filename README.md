@@ -29,6 +29,8 @@ The following environment variables are read for configuration of the backup too
 export VAULT_ADDR=<vault server cluster address>
 # equivalent to VAULT_TOKEN with vault cli executable; if authentication method does not produce a token, then use 26 dummy characters for this input
 export VAULT_TOKEN=<vault authentication token>
+# equivalent to VAULT_SKIP_VERIFY with vault cli executable
+export VAULT_SKIP_VERIFY=<boolean>
 export VAULT_SNAPSHOT_PATH=<path to local filesystem for snapshot staging>
 export S3_BUCKET=<name of s3 bucket for snapshot transfer and storage>
 # this is prepended to the base filename in VAULT_SNAPSHOT_PATH
