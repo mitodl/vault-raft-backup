@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -11,8 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	"github.com/hashicorp/vault/api"
-	"github.com/hashicorp/vault/api/auth/aws"
+	vault "github.com/hashicorp/vault/api"
+	auth "github.com/hashicorp/vault/api/auth/aws"
 )
 
 // VaultConfig is for vault interface
@@ -71,10 +72,10 @@ func main() {
 }
 
 // vault client configuration
-func vaultClientConfig(config *VaultConfig) (*api.Client, error) {
+func vaultClientConfig(config *VaultConfig) (*vault.Client, error) {
 	// initialize config
-	vaultConfig := &api.Config{Address: config.vaultAddr}
-	err := vaultConfig.ConfigureTLS(&api.TLSConfig{Insecure: config.insecure})
+	vaultConfig := &vault.Config{Address: config.vaultAddr}
+	err := vaultConfig.ConfigureTLS(&vault.TLSConfig{Insecure: config.insecure})
 	if err != nil {
 		fmt.Println("Vault TLS configuration failed to initialize")
 		fmt.Println(err)
@@ -82,7 +83,7 @@ func vaultClientConfig(config *VaultConfig) (*api.Client, error) {
 	}
 
 	// initialize client
-	client, err := api.NewClient(vaultConfig)
+	client, err := vault.NewClient(vaultConfig)
 	if err != nil {
 		fmt.Println("Vault client failed to initialize")
 		fmt.Println(err)
@@ -92,7 +93,7 @@ func vaultClientConfig(config *VaultConfig) (*api.Client, error) {
 	// determine authentication method
 	if config.token == "aws-iam" {
 		// authenticate with aws iam
-		awsAuth, err := aws.NewAWSAuth(aws.WithIAMAuth)
+		awsAuth, err := auth.NewAWSAuth(auth.WithIAMAuth)
 		if err != nil {
 			return nil, errors.New("Unable to initialize AWS IAM authentication")
 		}
@@ -117,7 +118,7 @@ func vaultClientConfig(config *VaultConfig) (*api.Client, error) {
 }
 
 // vault raft snapshot creation
-func vaultRaftSnapshot(client *api.Client, string snapshotPath) (*os.File, error) {
+func vaultRaftSnapshot(client *vault.Client, snapshotPath string) (*os.File, error) {
 	// prepare snaptshot file
 	snapshotFile, err := os.OpenFile(snapshotPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)
 	if err != nil {
