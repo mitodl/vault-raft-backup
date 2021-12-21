@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/hashicorp/vault/api"
+	"github.com/hashicorp/vault/api/auth/aws"
 )
 
 // VaultConfig is for vault interface
@@ -73,6 +74,7 @@ func vaultRaftSnapshot(config *VaultConfig) (*os.File, error) {
 		fmt.Println(err)
 		return nil, err
 	}
+
 	// initialize client
 	client, err := api.NewClient(vaultConfig)
 	if err != nil {
@@ -81,11 +83,28 @@ func vaultRaftSnapshot(config *VaultConfig) (*os.File, error) {
 		return nil, err
 	}
 
-	// authenticate
-	if len(config.token) != 26 {
-		return nil, errors.New("The Vault token is invalid")
+	// determine authentication method
+	if config.token == "aws-iam" {
+		// authenticate with aws iam
+		awsAuth, err := aws.NewAWSAuth(aws.WithIAMAuth)
+		if err != nil {
+			return nil, errors.New("Unable to initialize AWS IAM authentication")
+		}
+
+		authInfo, err := client.Auth().Login(context.TODO(), awsAuth)
+		if err != nil {
+			return nil, errors.New("Unable to login to AWS IAM auth method")
+		}
+		if authInfo == nil {
+			return nil, errors.New("No auth info was returned after login")
+		}
+	} else {
+		// authenticate with token
+		if len(config.token) != 26 {
+			return nil, errors.New("The Vault token is invalid")
+		}
+		client.SetToken(config.token)
 	}
-	client.SetToken(config.token)
 
 	// prepare snaptshot file
 	snapshotFile, err := os.OpenFile(config.snapshotPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)

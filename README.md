@@ -27,7 +27,7 @@ The following environment variables are read for configuration of the backup too
 ```
 # equivalent to VAULT_ADDR with vault cli executable
 export VAULT_ADDR=<vault server cluster address>
-# equivalent to VAULT_TOKEN with vault cli executable; if authentication method does not produce a token, then use 26 dummy characters for this input
+# equivalent to VAULT_TOKEN with vault cli executable; if using aws iam auth, then set this equal to "aws-iam" instead
 export VAULT_TOKEN=<vault authentication token>
 # equivalent to VAULT_SKIP_VERIFY with vault cli executable
 export VAULT_SKIP_VERIFY=<boolean>
