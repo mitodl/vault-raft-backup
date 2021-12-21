@@ -8,6 +8,8 @@ If executing as an ad-hoc compile and run (i.e. `go run`), then the dependencies
 
 - Connectivity to a functioning Vault server cluster with Raft integrated storage.
 - Authentication and authorization against the Vault server cluster for executing Raft snapshots.
+  - Authentication can be input in general as a token.
+  - Authentication can also specified as AWS IAM. In this situation, the Vault server cluster must have a role mapped to an AWS IAM role. This AWS IAM role must also be automatically accessible by this tool (e.g. executed on EC2 instance with appropriate IAM Instance profile).
 - A local filesystem with permissions and storage capable of staging the snapshot.
 - Authentication and authorization against an AWS account for listing, reading, and writing objects to a S3 bucket.
 - A S3 bucket capable of storing the snapshot.

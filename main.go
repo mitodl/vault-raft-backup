@@ -93,7 +93,7 @@ func vaultClientConfig(config *VaultConfig) (*vault.Client, error) {
 	// determine authentication method
 	if config.token == "aws-iam" {
 		// authenticate with aws iam
-		awsAuth, err := auth.NewAWSAuth(auth.WithIAMAuth)
+		awsAuth, err := auth.NewAWSAuth(auth.WithIAMAuth())
 		if err != nil {
 			return nil, errors.New("Unable to initialize AWS IAM authentication")
 		}
@@ -147,7 +147,7 @@ func snapshotS3Upload(config *AWSConfig, snapshotPath string) (*s3manager.Upload
 	// open snapshot and defer closing
 	snapshotFile, err := os.Open(snapshotPath)
 	if err != nil {
-		fmt.Printf("Failed to open snapshot file %q, %v", snapshotPath, err)
+		fmt.Printf("Failed to open snapshot file %q: %v", snapshotPath, err)
 		return nil, err
 	}
 	defer snapshotFileClose(snapshotFile)
