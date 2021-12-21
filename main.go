@@ -34,7 +34,7 @@ func main() {
 	// initialize vaultConfig and awsConfig
 	insecure, err := strconv.ParseBool(os.Getenv("VAULT_SKIP_VERIFY"))
 	if err != nil {
-		log.Fatalln("Invalid value for VAULT_SKIP_VERIFY")
+		log.Fatalln("Invalid boolean value for VAULT_SKIP_VERIFY")
 	}
 	vaultConfig := VaultConfig{
 		vaultAddr:    os.Getenv("VAULT_ADDR"),
@@ -48,8 +48,14 @@ func main() {
 		s3Region: os.Getenv("AWS_REGION"),
 	}
 
+	// initialize and configure client
+  vaultClient, err := vaultClientConfig(&vaultConfig)
+	if err != nil {
+		log.Fatalln("Vault client initialization and configuration failed")
+	}
+
 	// vault raft snapshot
-	snapshotFile, err := vaultRaftSnapshot(&vaultConfig)
+	snapshotFile, err := vaultRaftSnapshot(vaultClient, vaultConfig.snapshotPath)
 	if err != nil {
 		log.Fatalln("Vault Raft Snapshot failed")
 	}
@@ -64,8 +70,8 @@ func main() {
 	fmt.Printf("Vault Raft snapshot uploaded to, %s\n", aws.StringValue(&uploadResult.Location))
 }
 
-// vault raft snapshot creation
-func vaultRaftSnapshot(config *VaultConfig) (*os.File, error) {
+// vault client configuration
+func vaultClientConfig(config *VaultConfig) (*api.Client, error) {
 	// initialize config
 	vaultConfig := &api.Config{Address: config.vaultAddr}
 	err := vaultConfig.ConfigureTLS(&api.TLSConfig{Insecure: config.insecure})
@@ -106,10 +112,16 @@ func vaultRaftSnapshot(config *VaultConfig) (*os.File, error) {
 		client.SetToken(config.token)
 	}
 
+	// return vault client interface
+  return client, nil
+}
+
+// vault raft snapshot creation
+func vaultRaftSnapshot(client *api.Client, string snapshotPath) (*os.File, error) {
 	// prepare snaptshot file
-	snapshotFile, err := os.OpenFile(config.snapshotPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)
+	snapshotFile, err := os.OpenFile(snapshotPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)
 	if err != nil {
-		fmt.Println("snapshot file at " + config.snapshotPath + " could not be created")
+		fmt.Println("snapshot file at " + snapshotPath + " could not be created")
 		fmt.Println(err)
 		return nil, err
 	}
