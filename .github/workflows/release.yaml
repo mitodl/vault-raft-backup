@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - uses: wangyoucao577/go-release-action@v1.49
+    - uses: wangyoucao577/go-release-action@8fa1e8368c8465264d64e0198208e10f71474c87 # v1.50
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: linux
