@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
 	github.com/Microsoft/hcsshim v0.8.9 // indirect
-	github.com/aws/aws-sdk-go v1.54.19
+	github.com/aws/aws-sdk-go v1.54.20
 	github.com/containerd/containerd v1.3.4 // indirect
 	github.com/containerd/continuity v0.0.0-20200709052629-daa8e1ccc0bc // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
