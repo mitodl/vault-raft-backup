@@ -13,7 +13,7 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/gorilla/mux v1.7.4 // indirect
 	github.com/hashicorp/vault/api v1.3.0
-	github.com/hashicorp/vault/api/auth/aws v0.1.0
+	github.com/hashicorp/vault/api/auth/aws v0.9.0
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
