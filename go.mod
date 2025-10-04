@@ -6,7 +6,7 @@ toolchain go1.25.1
 
 require (
 	github.com/aws/aws-sdk-go v1.55.8
-	github.com/hashicorp/vault/api v1.21.0
+	github.com/hashicorp/vault/api v1.22.0
 	github.com/hashicorp/vault/api/auth/aws v0.10.0
 )
 
