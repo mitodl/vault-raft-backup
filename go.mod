@@ -7,7 +7,7 @@ toolchain go1.25.1
 require (
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/hashicorp/vault/api v1.22.0
-	github.com/hashicorp/vault/api/auth/aws v0.10.0
+	github.com/hashicorp/vault/api/auth/aws v0.11.0
 )
 
 require (
@@ -86,7 +86,7 @@ require (
 	github.com/hashicorp/go-plugin v1.4.3 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.8 // indirect
 	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
-	github.com/hashicorp/go-secure-stdlib/awsutil v0.1.6 // indirect
+	github.com/hashicorp/go-secure-stdlib/awsutil v0.3.0 // indirect
 	github.com/hashicorp/go-secure-stdlib/base62 v0.1.1 // indirect
 	github.com/hashicorp/go-secure-stdlib/mlock v0.1.1 // indirect
 	github.com/hashicorp/go-secure-stdlib/parseutil v0.2.0 // indirect
