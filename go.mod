@@ -2,7 +2,7 @@ module github.com/mitodl/vault-raft-backup
 
 go 1.23.0
 
-toolchain go1.25.1
+toolchain go1.25.2
 
 require (
 	github.com/aws/aws-sdk-go v1.55.8
