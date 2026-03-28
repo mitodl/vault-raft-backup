@@ -259,6 +259,8 @@ github.com/hashicorp/vault/api/auth/aws v0.10.0 h1:65gibOnaZxflNVW3kxgbXZqIC1imV
 github.com/hashicorp/vault/api/auth/aws v0.10.0/go.mod h1:VBdP6zwH2MBC4BW+pZ+soPYeabXBVUTfWDccWfFo49I=
 github.com/hashicorp/vault/api/auth/aws v0.11.0 h1:lWdUxrzvPotg6idNr62al4w97BgI9xTDdzMCTViNH2s=
 github.com/hashicorp/vault/api/auth/aws v0.11.0/go.mod h1:PWqdH/xqaudapmnnGP9ip2xbxT/kRW2qEgpqiQff6Gc=
+github.com/hashicorp/vault/api/auth/aws v0.12.0 h1:onkMrv49rQCF5Zx1/BdIEvwyhh9R2mXkgfZFWdW+kfM=
+github.com/hashicorp/vault/api/auth/aws v0.12.0/go.mod h1:Cuyla0RLfTnPkaJCaHGfNGsNIY1GqB2G79T7XI/9N+I=
 github.com/hashicorp/vault/sdk v0.1.14-0.20200519221530-14615acda45f/go.mod h1:WX57W2PwkrOPQ6rVQk+dy5/htHIaB4aBM70EwKThu10=
 github.com/hashicorp/vault/sdk v0.2.1 h1:S4O6Iv/dyKlE9AUTXGa7VOvZmsCvg36toPKgV4f2P4M=
 github.com/hashicorp/vault/sdk v0.2.1/go.mod h1:WfUiO1vYzfBkz1TmoE4ZGU7HD0T0Cl/rZwaxjBkgN4U=
