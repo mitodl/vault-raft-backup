@@ -67,7 +67,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/go-test/deep v1.1.1 // indirect
 	github.com/godbus/dbus v0.0.0-20190422162347-ade71ed3457e // indirect
-	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/golang/mock v1.1.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
@@ -108,7 +108,7 @@ require (
 	github.com/jmespath/go-jmespath/internal/testify v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/julienschmidt/httprouter v1.2.0 // indirect
-	github.com/kisielk/errcheck v1.2.0 // indirect
+	github.com/kisielk/errcheck v1.5.0 // indirect
 	github.com/kisielk/gotool v1.0.0 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515 // indirect
