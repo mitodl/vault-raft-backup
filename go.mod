@@ -150,7 +150,7 @@ require (
 	github.com/rogpeppe/go-internal v1.6.1 // indirect
 	github.com/ryanuber/columnize v2.1.2+incompatible // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
-	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/sirupsen/logrus v1.8.3 // indirect
 	github.com/spf13/cobra v0.0.2-0.20171109065643-2da4a54c5cee // indirect
 	github.com/spf13/pflag v1.0.3 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
