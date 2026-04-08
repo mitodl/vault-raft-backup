@@ -59,7 +59,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.3.1 // indirect
-	github.com/go-jose/go-jose/v4 v4.1.3 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
 	github.com/go-kit/kit v0.9.0 // indirect
 	github.com/go-ldap/ldap/v3 v3.1.10 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
