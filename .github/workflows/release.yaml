@@ -9,6 +9,8 @@ jobs:
   release-linux-amd64:
     name: create linux amd64 release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: checkout
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
